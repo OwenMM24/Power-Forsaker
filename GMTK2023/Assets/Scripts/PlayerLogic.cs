@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class PlayerLogic : MonoBehaviour
 {
+    public Rigidbody2D rb;
+
     public float accel;
     public float decel;
     public float xSpeed;
     public float ySpeed;
     public Vector2 maxSpeed;
-    //public float gravity;
     public float jumpHeight;
 
     public bool isGrounded;
     public Transform groundCheck;
     public float groundDistance = 0.5f;
     public LayerMask groundMask;
-
-    public Rigidbody2D rb;
 
     public bool canWalk;
     public bool canJump;
@@ -45,8 +44,7 @@ public class PlayerLogic : MonoBehaviour
 
     void Update()
     {
-        float xAxis = Input.GetAxisRaw("Horizontal");
-        //ySpeed = 0;
+        float xAxis = Input.GetAxisRaw("Horizontal"); //variable that represents horizontal input
 
         if (canWalk)
         {
@@ -63,7 +61,6 @@ public class PlayerLogic : MonoBehaviour
                 }
             }
         }
-        
 
         if (Mathf.Abs(xSpeed) > maxSpeed.x * Mathf.Abs(xAxis))
         {
@@ -89,11 +86,9 @@ public class PlayerLogic : MonoBehaviour
                 rb.velocity = new Vector2(xSpeed, Mathf.Sqrt(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale)));
             }
         }
-        
-
-        
     }
 
+    //proper sign method that makes 0 act like 0
     int Sign(float var)
     {
         if (var < 0)
