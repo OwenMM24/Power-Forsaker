@@ -8995,10 +8995,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d56022797108a51cbf327839b0a4542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accel: 0.3
+  state: 0
+  accel: 30
   decel: 0.1
-  maxSpeed: {x: 6, y: 99}
-  jumpHeight: 2
+  xSpeed: 0
+  ySpeed: 0
+  maxSpeed: {x: 99999, y: 99999}
+  jumpHeight: 2225
   groundCheck: {fileID: 2033261725}
   groundDistance: 0.6
   groundMask:
@@ -9008,6 +9011,8 @@ MonoBehaviour:
   canJump: 1
   canDoubleJump: 1
   canDash: 1
+  dirFacing: 1
+  dashDist: 6
   canWallJump: 1
   canGroundPound: 1
   canGlide: 1
