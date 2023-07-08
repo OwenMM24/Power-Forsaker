@@ -9,45 +9,53 @@ public class PlayerLogic : MonoBehaviour
         */
     Rigidbody2D rb;
 
-    public enum states
+    enum states
     {
         regular,
-        dashInitial,
         dash,
-        groundPound
+        groundPound,
+        wallJump
     }
-    public states state;
+    states state;
 
-    public float accel = .3f;
-    public float decel = .1f;
-    public float xSpeed;
-    public float ySpeed;
+    public float accel = 10f;
+    public float decel = 10f;
+    float xSpeed;
+    float ySpeed;
     public Vector2 maxSpeed = new Vector2(7f, 99f);
     public float jumpHeight = 2f;
 
     bool isGrounded = false;
     public Transform groundCheck;
-    public float groundDistance = 0.5f;
+    public float groundDistance = 0.55f;
     public LayerMask groundMask;
 
-    public bool canWalk = true;
+    bool canWalk = true;
 
-    public bool canJump = true;
+    bool canJump = true;
 
-    public bool canDoubleJump = true;
+    bool canDoubleJump = true;
     bool usedExtraJump = false;
 
-    public bool canDash = true;
+    bool canDash = true;
     int dirFacing = 1;
     public float dashDist = 15f;
     public float dashDecel = 30f;
 
-    public bool canWallJump = true;
+    bool canWallJump = true;
+    bool wallLeft = false;
+    bool wallRight = false;
+    float wallJumpTimer = 0f;
+    public float wallJumpTimerSet = 1f;
+    public Transform wallCheckLeft;
+    public Transform wallCheckRight;
+    public Vector2 wallDistance = new Vector2(.2f, .5f);
 
-    public bool canGroundPound = true;
+    bool canGroundPound = true;
+    public float gPGravityScale = 10f;
 
-    public bool canGlide = true;
-    public float defaultGravityScale;
+    bool canGlide = true;
+    float defaultGravityScale;
     public float newGravityScale = .3f;
     public float maxGlideYVelocity = 5f;
 
@@ -101,12 +109,39 @@ public class PlayerLogic : MonoBehaviour
                     }
                 }
 
+                //state changing actions
                 if (canDash && Input.GetButtonDown("Dash"))
                 {
                     xSpeed = dashDist * dirFacing;
                     rb.velocity = new Vector2(xSpeed, 0);
                     rb.gravityScale = 0;
                     state = states.dash;
+                    break;
+                }
+
+                if (canGroundPound && Input.GetButtonDown("Down") && !isGrounded)
+                {
+                    xSpeed = 0;
+                    rb.gravityScale = gPGravityScale;
+                    state = states.groundPound;
+                    break;
+                }
+
+                wallLeft = Physics2D.OverlapBox(wallCheckLeft.position, wallDistance, 0f, groundMask);
+                wallRight = Physics2D.OverlapBox(wallCheckRight.position, wallDistance, 0f, groundMask);
+                if (canWallJump && Input.GetButton("Jump") && (wallLeft || wallRight))
+                {
+                    if (wallLeft)
+                    {
+                        dirFacing = 1;
+                    }
+                    else
+                    {
+                        dirFacing = -1;
+                    }
+                    rb.velocity = new Vector2(maxSpeed.x * dirFacing, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))));
+                    wallJumpTimer = wallJumpTimerSet;
+                    state = states.wallJump;
                     break;
                 }
 
@@ -165,6 +200,21 @@ public class PlayerLogic : MonoBehaviour
             rb.velocity = new Vector2(xSpeed, 0);
             break;
         case states.groundPound:
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask);
+            if (isGrounded)
+            {
+                rb.gravityScale = defaultGravityScale;
+                state = states.regular;
+                break;
+            }
+            break;
+        case states.wallJump:
+            wallJumpTimer -= Time.deltaTime;
+            if (wallJumpTimer <= 0)
+            {
+                state = states.regular;
+                break;
+            }
             break;
         }
     }
@@ -194,5 +244,54 @@ public class PlayerLogic : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+        if (wallCheckLeft == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireCube(wallCheckLeft.position, wallDistance);
+        if (wallCheckRight == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireCube(wallCheckRight.position, wallDistance);
     }
+
+    /*
+    public float wallBounceCounter;
+    public float wallSlideSpeed;
+    public float wallDistance;
+    public bool isWallSliding = false;
+    public float bounceTime;
+    RaycastHit2D WallCheckHit;
+    public LayerMask whatIsWall;
+    public bool isFacingRight = true;
+
+
+       //wall bounce
+        if(isWallSliding && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = Vector2.up * jumpForce;
+        }
+
+        if (isFacingRight)
+        {
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, whatIsWall);
+            Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.blue);
+        }
+        else
+        {
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, whatIsWall);
+            Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.blue);
+        }
+
+
+        if(WallCheckHit && isGrounded == false && moveInput != 0)
+        {
+            isWallSliding = true;
+            bounceTime = Time.time + wallBounceCounter;
+        } else if (bounceTime < Time.time)
+        {
+            isWallSliding = false;
+        }
+    */
 }
