@@ -38,6 +38,7 @@ public class PlayerLogic : MonoBehaviour
     bool usedExtraJump = false;
 
     public bool canDash = true;
+    bool hasDashed = false;
     int dirFacing = 1;
     public float dashDist = 15f;
     public float dashDecel = 30f;
@@ -110,8 +111,9 @@ public class PlayerLogic : MonoBehaviour
                 }
 
                 //state changing actions
-                if (canDash && Input.GetButtonDown("Dash")) //change state to dash
+                if (canDash && !hasDashed && Input.GetButtonDown("Dash")) //change state to dash
                 {
+                    hasDashed = true;
                     xSpeed = dashDist * dirFacing;
                     rb.velocity = new Vector2(xSpeed, 0);
                     rb.gravityScale = 0;
@@ -164,6 +166,7 @@ public class PlayerLogic : MonoBehaviour
                 isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask);
                 if (isGrounded)
                 {
+                    hasDashed = false;
                     usedExtraJump = false;
                     if (Input.GetButtonDown("Jump") && canJump)
                     {
