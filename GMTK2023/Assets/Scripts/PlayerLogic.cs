@@ -267,6 +267,14 @@ public class PlayerLogic : MonoBehaviour
                 transform.position = spawnPoint;
             }
         }
+
+        if (col.gameObject.tag == "Destructible")
+        {
+            if (state == states.groundPound)
+            {
+                Destroy(col.gameObject);
+            }
+        }
     }
 
     //proper sign method that makes 0 act like 0
