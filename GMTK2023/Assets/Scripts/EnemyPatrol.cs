@@ -7,14 +7,9 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] float moveSpeed = 1f;
 
     Rigidbody2D myRigidbody;
-    RaycastHit2D WallCheckHit;
-
-    [SerializeField] float checkDistance = 1f;
 
     [SerializeField] float LRange;
     [SerializeField] float RRange;
-
-    float health = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -28,10 +23,10 @@ public class EnemyPatrol : MonoBehaviour
     {
 
         if (transform.position.x > RRange)
-            transform.localScale = new Vector2(-(Mathf.Sign(myRigidbody.velocity.x)), transform.localScale.y);   
+            transform.localScale = new Vector2(-1f, transform.localScale.y);   
 
         else if (transform.position.x < LRange)
-            transform.localScale = new Vector2(-(Mathf.Sign(myRigidbody.velocity.x)), transform.localScale.y);
+            transform.localScale = new Vector2(1f, transform.localScale.y);
         
 
 
@@ -49,21 +44,6 @@ public class EnemyPatrol : MonoBehaviour
     bool IsFacingRight()
     {
         return transform.localScale.x > Mathf.Epsilon;
-    }
-
-    public void UpdateHealth(float damage)
-    {
-        health -= damage; 
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            
-        }
-
-
     }
 
 }
