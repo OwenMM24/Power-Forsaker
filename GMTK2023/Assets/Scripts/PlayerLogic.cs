@@ -4,28 +4,31 @@ using UnityEngine;
 
 public class PlayerLogic : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    Rigidbody2D rb;
 
-    public float accel;
-    public float decel;
-    public float xSpeed;
-    public float ySpeed;
-    public Vector2 maxSpeed;
-    public float jumpHeight;
+    public float accel = .3f;
+    public float decel = .1f;
+    float xSpeed;
+    float ySpeed;
+    public Vector2 maxSpeed = new Vector2(7f, 99f);
+    public float jumpHeight = 2f;
 
-    public bool isGrounded;
+    bool isGrounded = false;
     public Transform groundCheck;
     public float groundDistance = 0.5f;
     public LayerMask groundMask;
 
-    public bool canWalk;
-    public bool canJump;
-    public bool canDoubleJump;
-    public bool usedExtraJump;
-    public bool canDash;
-    public bool canWallJump;
-    public bool canGroundPound;
-    public bool canGlide;
+    public bool canWalk = true;
+    public bool canJump = true;
+    public bool canDoubleJump = true;
+    bool usedExtraJump = false;
+    public bool canDash = true;
+    public bool canWallJump = true;
+    public bool canGroundPound = true;
+    public bool canGlide = true;
+    public float defaultGravityScale;
+    public float newGravityScale = .3f;
+    public float maxGlideYVelocity = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,8 @@ public class PlayerLogic : MonoBehaviour
         canWallJump = true;
         canGroundPound = true;
         canGlide = true;
+
+        defaultGravityScale = rb.gravityScale;
     }
 
     void Update()
@@ -62,9 +67,18 @@ public class PlayerLogic : MonoBehaviour
             }
         }
 
+        //caps the speed of the player on both axes
         if (Mathf.Abs(xSpeed) > maxSpeed.x * Mathf.Abs(xAxis))
         {
             xSpeed = maxSpeed.x * Sign(xAxis);
+        }
+        if (Mathf.Abs(ySpeed) > maxSpeed.y)
+        {
+            ySpeed = maxSpeed.y * Sign(ySpeed);
+        }
+        if ((Input.GetButton("Extra") && canGlide) && (Mathf.Abs(ySpeed) > maxGlideYVelocity))
+        {
+            ySpeed = maxGlideYVelocity * Sign(ySpeed);
         }
 
         rb.velocity = new Vector2(xSpeed, rb.velocity.y);
@@ -84,6 +98,15 @@ public class PlayerLogic : MonoBehaviour
             {
                 usedExtraJump = true;
                 rb.velocity = new Vector2(xSpeed, Mathf.Sqrt(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale)));
+            }
+
+            if (Input.GetButton("Extra") && canGlide && rb.velocity.y < -1f)
+            {
+                rb.gravityScale = newGravityScale;
+            }
+            else
+            {
+                rb.gravityScale = defaultGravityScale;
             }
         }
     }
