@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Out of Bounds
   - End Goal
+  - Enemy
   layers:
   - Default
   - TransparentFX
