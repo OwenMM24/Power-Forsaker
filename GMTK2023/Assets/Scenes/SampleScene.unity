@@ -8996,12 +8996,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  accel: 30
-  decel: 0.1
+  accel: 10
+  decel: 10
   xSpeed: 0
   ySpeed: 0
-  maxSpeed: {x: 99999, y: 99999}
-  jumpHeight: 2225
+  maxSpeed: {x: 7, y: 99}
+  jumpHeight: 2.3
   groundCheck: {fileID: 2033261725}
   groundDistance: 0.6
   groundMask:
@@ -9011,8 +9011,8 @@ MonoBehaviour:
   canJump: 1
   canDoubleJump: 1
   canDash: 1
-  dirFacing: 1
-  dashDist: 6
+  dashDist: 25
+  dashDecel: 30
   canWallJump: 1
   canGroundPound: 1
   canGlide: 1

@@ -38,8 +38,9 @@ public class PlayerLogic : MonoBehaviour
     bool usedExtraJump = false;
 
     public bool canDash = true;
-    public int dirFacing = 1;
-    public float dashDist = 6f;
+    int dirFacing = 1;
+    public float dashDist = 15f;
+    public float dashDecel = 30f;
 
     public bool canWallJump = true;
 
@@ -88,12 +89,12 @@ public class PlayerLogic : MonoBehaviour
                 {
                     if (Mathf.Abs(xAxis) != 0)
                     {
-                        xSpeed += accel * xAxis;
+                        xSpeed += accel * xAxis * Time.deltaTime;
                     }
                     else
                     {
-                        xSpeed += decel * Sign(-xSpeed);
-                        if (Mathf.Abs(xSpeed) <= decel)
+                        xSpeed += decel * Sign(-xSpeed) * Time.deltaTime;
+                        if ((Mathf.Abs(xSpeed) <= decel * Time.deltaTime) || (Mathf.Abs(xSpeed) <= 0.1f))
                         {
                             xSpeed = 0;
                         }
@@ -102,10 +103,11 @@ public class PlayerLogic : MonoBehaviour
 
                 if (canDash && Input.GetButtonDown("Dash"))
                 {
-                    xSpeed = dashDist/*Mathf.Sqrt(Mathf.Abs(dashDist * -2f * decel))*/ * dirFacing;
+                    xSpeed = dashDist * dirFacing;
                     rb.velocity = new Vector2(xSpeed, 0);
                     rb.gravityScale = 0;
                     state = states.dash;
+                    break;
                 }
 
                 //caps the speed of the player on both axes
@@ -122,7 +124,7 @@ public class PlayerLogic : MonoBehaviour
                     ySpeed = maxGlideYVelocity * Sign(ySpeed);
                 }
 
-                rb.velocity = new Vector2(xSpeed * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(xSpeed, rb.velocity.y);
 
                 isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask);
                 if (isGrounded)
@@ -130,7 +132,7 @@ public class PlayerLogic : MonoBehaviour
                     usedExtraJump = false;
                     if (Input.GetButtonDown("Jump") && canJump)
                     {
-                        rb.velocity = new Vector2(rb.velocity.x, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))) * Time.deltaTime); 
+                        rb.velocity = new Vector2(rb.velocity.x, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale)))); 
                     }
                 }
                 else
@@ -138,7 +140,7 @@ public class PlayerLogic : MonoBehaviour
                     if (Input.GetButtonDown("Jump") && canDoubleJump && !usedExtraJump)
                     {
                         usedExtraJump = true;
-                        rb.velocity = new Vector2(rb.velocity.x, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))) * Time.deltaTime);
+                        rb.velocity = new Vector2(rb.velocity.x, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))));
                     }
 
                     if (Input.GetButton("Extra") && canGlide && rb.velocity.y < -1f)
@@ -152,14 +154,15 @@ public class PlayerLogic : MonoBehaviour
                 }
                 break;
         case states.dash:
-            xSpeed += decel * Sign((float)dirFacing);
-            if (Mathf.Abs(xSpeed) <= decel)
+            xSpeed += dashDecel * Sign((float)-dirFacing) * Time.deltaTime;
+            if ((Mathf.Abs(xSpeed) <= dashDecel * Time.deltaTime) || (Mathf.Abs(xSpeed) <= 0.1f))
             {
                 xSpeed = 0;
                 rb.gravityScale = defaultGravityScale;
                 state = states.regular;
+                break;
             }
-            rb.velocity = new Vector2(xSpeed * Time.deltaTime, 0);
+            rb.velocity = new Vector2(xSpeed, 0);
             break;
         case states.groundPound:
             break;
