@@ -57,6 +57,8 @@ public class PlayerLogic : MonoBehaviour
     public float newGravityScale = .3f;
     public float maxGlideYVelocity = 5f;
 
+    public Vector3 spawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,8 @@ public class PlayerLogic : MonoBehaviour
         canGlide = true;
 
         defaultGravityScale = rb.gravityScale;
+
+        spawnPoint = transform.position;
     }
 
     void Update()
@@ -210,12 +214,41 @@ public class PlayerLogic : MonoBehaviour
                 break;
             case states.wallJump: ///player wall jump state
                 wallJumpTimer -= Time.deltaTime;
+
+                wallLeft = Physics2D.OverlapBox(wallCheckLeft.position, wallDistance, 0f, groundMask);
+                wallRight = Physics2D.OverlapBox(wallCheckRight.position, wallDistance, 0f, groundMask);
+                if (canWallJump && Input.GetButton("Jump") && (wallLeft || wallRight))
+                {
+                    if ((dirFacing == 1) && wallRight)
+                    {
+                        dirFacing = -1;
+                        rb.velocity = new Vector2(maxSpeed.x * dirFacing, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))));
+                        wallJumpTimer = wallJumpTimerSet;
+                    }
+                    else if ((dirFacing == -1) && wallLeft)
+                    {
+                        dirFacing = 1;
+                        rb.velocity = new Vector2(maxSpeed.x * dirFacing, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))));
+                        wallJumpTimer = wallJumpTimerSet;
+                    }
+                }
+
                 if (wallJumpTimer <= 0)
                 {
                     state = states.regular;
                     break;
                 }
                 break;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Out of Bounds")
+        {
+            xSpeed = 0;
+            ySpeed = 0;
+            transform.position = spawnPoint;
         }
     }
 

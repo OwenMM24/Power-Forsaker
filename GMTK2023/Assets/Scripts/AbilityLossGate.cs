@@ -8,6 +8,8 @@ public class AbilityLossGate : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
+            PlayerLogic playerScript = col.gameObject.GetComponent<PlayerLogic>();
+            playerScript.spawnPoint = col.gameObject.transform.position;
             AbilityMenu.choosingAbility = true;
             Destroy(gameObject);
         }

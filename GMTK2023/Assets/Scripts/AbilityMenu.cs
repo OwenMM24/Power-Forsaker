@@ -30,43 +30,71 @@ public class AbilityMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            playerScript.canWalk = RemoveAbility(playerScript.canWalk);
+            if (playerScript.canWalk == true)
+            {
+                playerScript.canWalk = false;
+                ResumeGame();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            RemoveAbility(playerScript.canJump);
+            if (playerScript.canJump == true)
+            {
+                playerScript.canJump = false;
+                ResumeGame();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            RemoveAbility(playerScript.canDoubleJump);
+            if (playerScript.canDoubleJump == true)
+            {
+                playerScript.canDoubleJump = false;
+                ResumeGame();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            RemoveAbility(playerScript.canWallJump);
+            if (playerScript.canWallJump == true)
+            {
+                playerScript.canWallJump = false;
+                ResumeGame();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            RemoveAbility(playerScript.canDash);
+            if (playerScript.canDash == true)
+            {
+                playerScript.canDash = false;
+                ResumeGame();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            RemoveAbility(playerScript.canGlide);
+            if (playerScript.canGlide == true)
+            {
+                playerScript.canGlide = false;
+                ResumeGame();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            RemoveAbility(playerScript.canGroundPound);
+            if (playerScript.canGroundPound == true)
+            {
+                playerScript.canGroundPound = false;
+                ResumeGame();
+            }
         }
     }
 
-    bool RemoveAbility(bool ability)
+    /*
+    bool RemoveAbility(bool ability) //deprecated, ignore
     {
         if (ability == true)
         {
-            //ability = false;
             ResumeGame();
-            return false;
         }
     }
+    */
 
     void ResumeGame()
     {
