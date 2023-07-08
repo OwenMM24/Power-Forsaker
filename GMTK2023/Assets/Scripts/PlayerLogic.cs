@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerLogic : MonoBehaviour
 {
-    /*To-do:
-        move all logic except input to FixedUpdate
-        */
     Rigidbody2D rb;
 
     enum states
@@ -191,34 +188,34 @@ public class PlayerLogic : MonoBehaviour
                     }
                 }
                 break;
-        case states.dash: //player dash state
-            xSpeed += dashDecel * Sign((float)-dirFacing) * Time.deltaTime;
-            if ((Mathf.Abs(xSpeed) <= dashDecel * Time.deltaTime) || (Mathf.Abs(xSpeed) <= 0.1f))
-            {
-                xSpeed = 0;
-                rb.gravityScale = defaultGravityScale;
-                state = states.regular;
+            case states.dash: //player dash state
+                xSpeed += dashDecel * Sign((float)-dirFacing) * Time.deltaTime;
+                if ((Mathf.Abs(xSpeed) <= dashDecel * Time.deltaTime) || (Mathf.Abs(xSpeed) <= 0.1f))
+                {
+                    xSpeed = 0;
+                    rb.gravityScale = defaultGravityScale;
+                    state = states.regular;
+                    break;
+                }
+                rb.velocity = new Vector2(xSpeed, 0);
                 break;
-            }
-            rb.velocity = new Vector2(xSpeed, 0);
-            break;
-        case states.groundPound: //player ground pound state
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask);
-            if (isGrounded)
-            {
-                rb.gravityScale = defaultGravityScale;
-                state = states.regular;
+            case states.groundPound: //player ground pound state
+                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask);
+                if (isGrounded)
+                {
+                    rb.gravityScale = defaultGravityScale;
+                    state = states.regular;
+                    break;
+                }
                 break;
-            }
-            break;
-        case states.wallJump: ///player wall jump state
-            wallJumpTimer -= Time.deltaTime;
-            if (wallJumpTimer <= 0)
-            {
-                state = states.regular;
+            case states.wallJump: ///player wall jump state
+                wallJumpTimer -= Time.deltaTime;
+                if (wallJumpTimer <= 0)
+                {
+                    state = states.regular;
+                    break;
+                }
                 break;
-            }
-            break;
         }
     }
 

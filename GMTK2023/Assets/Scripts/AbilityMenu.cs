@@ -30,38 +30,41 @@ public class AbilityMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            playerScript.canWalk = false;
-            ResumeGame();
+            playerScript.canWalk = RemoveAbility(playerScript.canWalk);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            playerScript.canJump = false;
-            ResumeGame();
+            RemoveAbility(playerScript.canJump);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            playerScript.canDoubleJump = false;
-            ResumeGame();
+            RemoveAbility(playerScript.canDoubleJump);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            playerScript.canWallJump = false;
-            ResumeGame();
+            RemoveAbility(playerScript.canWallJump);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            playerScript.canDash = false;
-            ResumeGame();
+            RemoveAbility(playerScript.canDash);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            playerScript.canGlide = false;
-            ResumeGame();
+            RemoveAbility(playerScript.canGlide);
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            playerScript.canGroundPound = false;
+            RemoveAbility(playerScript.canGroundPound);
+        }
+    }
+
+    bool RemoveAbility(bool ability)
+    {
+        if (ability == true)
+        {
+            //ability = false;
             ResumeGame();
+            return false;
         }
     }
 
