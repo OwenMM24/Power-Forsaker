@@ -28,7 +28,7 @@ public class AbilityMenu : MonoBehaviour
 
     void ChooseAbility()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && playerScript.canJump == false)
         {
             if (playerScript.canWalk == true)
             {
@@ -36,7 +36,7 @@ public class AbilityMenu : MonoBehaviour
                 ResumeGame();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && (playerScript.canDoubleJump == false) && (playerScript.canWallJump = false) && (playerScript.canDash = false) && (playerScript.canGlide = false) && (playerScript.canGroundPound == false))
         {
             if (playerScript.canJump == true)
             {
