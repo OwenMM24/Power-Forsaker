@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class AbilityLossGate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Colliding with player!");
-            PlayerLogic player = col.gameObject.GetComponent<PlayerLogic>();
-            player.canJump = false;
+            PlayerLogic playerScript = col.gameObject.GetComponent<PlayerLogic>();
+            playerScript.spawnPoint = col.gameObject.transform.position;
+            AbilityMenu.choosingAbility = true;
             Destroy(gameObject);
         }
     }
