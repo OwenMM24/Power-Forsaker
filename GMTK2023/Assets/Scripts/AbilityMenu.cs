@@ -18,6 +18,7 @@ public class AbilityMenu : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log((playerScript.canDoubleJump == false) && (playerScript.canWallJump = false) && (playerScript.canDash = false) && (playerScript.canGlide = false) && (playerScript.canGroundPound == false));
         if (choosingAbility)
         {
             abilityMenu.SetActive(true);
@@ -28,7 +29,7 @@ public class AbilityMenu : MonoBehaviour
 
     void ChooseAbility()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && playerScript.canJump == false)
+        if ((Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) && playerScript.canJump == false)
         {
             if (playerScript.canWalk == true)
             {
@@ -36,7 +37,7 @@ public class AbilityMenu : MonoBehaviour
                 ResumeGame();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && (playerScript.canDoubleJump == false) && (playerScript.canWallJump = false) && (playerScript.canDash = false) && (playerScript.canGlide = false) && (playerScript.canGroundPound == false))
+        if ((Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) && (playerScript.canDoubleJump == false) && (playerScript.canWallJump == false) && (playerScript.canDash == false) && (playerScript.canGlide == false) && (playerScript.canGroundPound == false))
         {
             if (playerScript.canJump == true)
             {
@@ -44,7 +45,7 @@ public class AbilityMenu : MonoBehaviour
                 ResumeGame();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if ((Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)))
         {
             if (playerScript.canDoubleJump == true)
             {
@@ -52,7 +53,7 @@ public class AbilityMenu : MonoBehaviour
                 ResumeGame();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if ((Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4)))
         {
             if (playerScript.canWallJump == true)
             {
@@ -60,7 +61,7 @@ public class AbilityMenu : MonoBehaviour
                 ResumeGame();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        if ((Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5)))
         {
             if (playerScript.canDash == true)
             {
@@ -68,7 +69,7 @@ public class AbilityMenu : MonoBehaviour
                 ResumeGame();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
+        if ((Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6)))
         {
             if (playerScript.canGlide == true)
             {
@@ -76,7 +77,7 @@ public class AbilityMenu : MonoBehaviour
                 ResumeGame();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
+        if ((Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7)))
         {
             if (playerScript.canGroundPound == true)
             {
