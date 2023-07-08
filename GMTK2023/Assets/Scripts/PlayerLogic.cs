@@ -84,7 +84,7 @@ public class PlayerLogic : MonoBehaviour
         {
             case states.regular:
                 float xAxis = Input.GetAxisRaw("Horizontal"); //variable that represents horizontal input
-                if (xAxis < 0)
+                if (xAxis < 0) //determines direction player is facing from input
                 {
                     dirFacing = -1;
                 }
@@ -110,7 +110,7 @@ public class PlayerLogic : MonoBehaviour
                 }
 
                 //state changing actions
-                if (canDash && Input.GetButtonDown("Dash"))
+                if (canDash && Input.GetButtonDown("Dash")) //change state to dash
                 {
                     xSpeed = dashDist * dirFacing;
                     rb.velocity = new Vector2(xSpeed, 0);
@@ -119,7 +119,7 @@ public class PlayerLogic : MonoBehaviour
                     break;
                 }
 
-                if (canGroundPound && Input.GetButtonDown("Down") && !isGrounded)
+                if (canGroundPound && Input.GetButtonDown("Down") && !isGrounded) //change state to ground pound
                 {
                     xSpeed = 0;
                     rb.gravityScale = gPGravityScale;
@@ -129,7 +129,7 @@ public class PlayerLogic : MonoBehaviour
 
                 wallLeft = Physics2D.OverlapBox(wallCheckLeft.position, wallDistance, 0f, groundMask);
                 wallRight = Physics2D.OverlapBox(wallCheckRight.position, wallDistance, 0f, groundMask);
-                if (canWallJump && Input.GetButton("Jump") && (wallLeft || wallRight))
+                if (canWallJump && Input.GetButton("Jump") && (wallLeft || wallRight)) //change state to wall jump
                 {
                     if (wallLeft)
                     {
@@ -159,7 +159,7 @@ public class PlayerLogic : MonoBehaviour
                     ySpeed = maxGlideYVelocity * Sign(ySpeed);
                 }
 
-                rb.velocity = new Vector2(xSpeed, rb.velocity.y);
+                rb.velocity = new Vector2(xSpeed, rb.velocity.y); //sets horizontal velocity
 
                 isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask);
                 if (isGrounded)
@@ -188,7 +188,7 @@ public class PlayerLogic : MonoBehaviour
                     }
                 }
                 break;
-        case states.dash:
+        case states.dash: //player dash state
             xSpeed += dashDecel * Sign((float)-dirFacing) * Time.deltaTime;
             if ((Mathf.Abs(xSpeed) <= dashDecel * Time.deltaTime) || (Mathf.Abs(xSpeed) <= 0.1f))
             {
@@ -199,7 +199,7 @@ public class PlayerLogic : MonoBehaviour
             }
             rb.velocity = new Vector2(xSpeed, 0);
             break;
-        case states.groundPound:
+        case states.groundPound: //player ground pound state
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask);
             if (isGrounded)
             {
@@ -208,7 +208,7 @@ public class PlayerLogic : MonoBehaviour
                 break;
             }
             break;
-        case states.wallJump:
+        case states.wallJump: ///player wall jump state
             wallJumpTimer -= Time.deltaTime;
             if (wallJumpTimer <= 0)
             {
@@ -236,7 +236,7 @@ public class PlayerLogic : MonoBehaviour
         }
     }
 
-    //allows for the player ground check sphere to be seen in the editor
+    //allows for the player ground check sphere and wall check boxes to be seen in the editor
     void OnDrawGizmosSelected()
     {
         if (groundCheck == null)

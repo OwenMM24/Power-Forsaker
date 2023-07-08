@@ -20,9 +20,7 @@ public class AbilityLossGate : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Colliding with player!");
-            PlayerLogic player = col.gameObject.GetComponent<PlayerLogic>();
-            player.canJump = false;
+            AbilityMenu.choosingAbility = true;
             Destroy(gameObject);
         }
     }
