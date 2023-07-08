@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class CameraLogic : MonoBehaviour
 {
+    public Camera cam;
     public Transform target;
     public Vector3 offset;
+    public float orthoSize = 5f;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+        cam = GetComponent<Camera>();
+        cam.orthographicSize = orthoSize;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         transform.position = target.position + offset;
