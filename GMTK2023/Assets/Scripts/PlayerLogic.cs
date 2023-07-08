@@ -30,19 +30,19 @@ public class PlayerLogic : MonoBehaviour
     public float groundDistance = 0.55f;
     public LayerMask groundMask;
 
-    bool canWalk = true;
+    public bool canWalk = true;
 
-    bool canJump = true;
+    public bool canJump = true;
 
-    bool canDoubleJump = true;
+    public bool canDoubleJump = true;
     bool usedExtraJump = false;
 
-    bool canDash = true;
+    public bool canDash = true;
     int dirFacing = 1;
     public float dashDist = 15f;
     public float dashDecel = 30f;
 
-    bool canWallJump = true;
+    public bool canWallJump = true;
     bool wallLeft = false;
     bool wallRight = false;
     float wallJumpTimer = 0f;
@@ -51,10 +51,10 @@ public class PlayerLogic : MonoBehaviour
     public Transform wallCheckRight;
     public Vector2 wallDistance = new Vector2(.2f, .5f);
 
-    bool canGroundPound = true;
+    public bool canGroundPound = true;
     public float gPGravityScale = 10f;
 
-    bool canGlide = true;
+    public bool canGlide = true;
     float defaultGravityScale;
     public float newGravityScale = .3f;
     public float maxGlideYVelocity = 5f;
@@ -255,43 +255,4 @@ public class PlayerLogic : MonoBehaviour
         }
         Gizmos.DrawWireCube(wallCheckRight.position, wallDistance);
     }
-
-    /*
-    public float wallBounceCounter;
-    public float wallSlideSpeed;
-    public float wallDistance;
-    public bool isWallSliding = false;
-    public float bounceTime;
-    RaycastHit2D WallCheckHit;
-    public LayerMask whatIsWall;
-    public bool isFacingRight = true;
-
-
-       //wall bounce
-        if(isWallSliding && Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.velocity = Vector2.up * jumpForce;
-        }
-
-        if (isFacingRight)
-        {
-            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, whatIsWall);
-            Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.blue);
-        }
-        else
-        {
-            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, whatIsWall);
-            Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.blue);
-        }
-
-
-        if(WallCheckHit && isGrounded == false && moveInput != 0)
-        {
-            isWallSliding = true;
-            bounceTime = Time.time + wallBounceCounter;
-        } else if (bounceTime < Time.time)
-        {
-            isWallSliding = false;
-        }
-    */
 }
