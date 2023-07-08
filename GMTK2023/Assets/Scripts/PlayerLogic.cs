@@ -255,6 +255,18 @@ public class PlayerLogic : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
+
+        if (col.gameObject.tag == "Enemy")
+        {
+            if ((state == states.dash) || (state == states.groundPound))
+            {
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                transform.position = spawnPoint;
+            }
+        }
     }
 
     //proper sign method that makes 0 act like 0
