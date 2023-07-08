@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLogic : MonoBehaviour
 {
@@ -249,6 +250,10 @@ public class PlayerLogic : MonoBehaviour
             xSpeed = 0;
             ySpeed = 0;
             transform.position = spawnPoint;
+        }
+        if (col.gameObject.tag == "End Goal")
+        {
+            SceneManager.LoadScene(2);
         }
     }
 
