@@ -18,5 +18,9 @@ public class CameraLogic : MonoBehaviour
     void LateUpdate()
     {
         transform.position = target.position + offset;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }
