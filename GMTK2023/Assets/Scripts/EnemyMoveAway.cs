@@ -38,7 +38,7 @@ public class EnemyMoveAway : MonoBehaviour
         shotTimer -= Time.deltaTime;
 
 
-        if(Mathf.Abs(player.transform.position.x - transform.position.x) <= 5)
+        if(Mathf.Abs(player.transform.position.x - transform.position.x) <= checkDistance)
         {
             if (player.transform.position.x < transform.position.x)
             {
