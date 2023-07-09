@@ -7,6 +7,7 @@ public class PlayerLogic : MonoBehaviour
 {
     Rigidbody2D rb;
     public SpriteRenderer playerGraphic;
+    public Animator anim;
 
     enum states
     {
@@ -290,6 +291,15 @@ public class PlayerLogic : MonoBehaviour
         if (dirFacing == 1)
         {
             playerGraphic.flipX = false;
+        }
+
+        if ((state == states.regular) && (Mathf.Abs(xSpeed) > 0))
+        {
+            anim.Play("Player_Walk");
+        }
+        else
+        {
+            anim.Play("Player_Idle");
         }
     }
 
