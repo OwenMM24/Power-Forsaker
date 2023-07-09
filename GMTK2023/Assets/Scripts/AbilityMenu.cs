@@ -9,6 +9,8 @@ public class AbilityMenu : MonoBehaviour
     PlayerLogic playerScript;
     public static bool isPaused = false;
     public static bool choosingAbility = false;
+
+    public GameObject[] abilities;
     
     void Start()
     {
@@ -32,6 +34,10 @@ public class AbilityMenu : MonoBehaviour
             if (playerScript.canJump == false)
             {
                 playerScript.canWalk = false;
+                if (abilities[0] != null)
+                {
+                    abilities[0].SetActive(false);
+                }
                 ResumeGame();
             }
         }
@@ -43,6 +49,10 @@ public class AbilityMenu : MonoBehaviour
             if ((playerScript.canDoubleJump == false) && (playerScript.canWallJump == false) && (playerScript.canDash == false) && (playerScript.canGlide == false) && (playerScript.canGroundPound == false))
             {
                 playerScript.canJump = false;
+                if (abilities[1] != null)
+                {
+                    abilities[1].SetActive(false);
+                }
                 ResumeGame();
             }
         }
@@ -52,6 +62,10 @@ public class AbilityMenu : MonoBehaviour
         if (playerScript.canDoubleJump == true)
         {
             playerScript.canDoubleJump = false;
+            if (abilities[2] != null)
+            {
+                abilities[2].SetActive(false);
+            }
             ResumeGame();
         }
     }
@@ -60,6 +74,10 @@ public class AbilityMenu : MonoBehaviour
         if (playerScript.canWallJump == true)
         {
             playerScript.canWallJump = false;
+            if (abilities[3] != null)
+            {
+                abilities[3].SetActive(false);
+            }
             ResumeGame();
         }
     }
@@ -68,6 +86,10 @@ public class AbilityMenu : MonoBehaviour
         if (playerScript.canDash == true)
         {
             playerScript.canDash = false;
+            if (abilities[4] != null)
+            {
+                abilities[4].SetActive(false);
+            }
             ResumeGame();
         }
     }
@@ -76,6 +98,10 @@ public class AbilityMenu : MonoBehaviour
         if (playerScript.canGlide == true)
         {
             playerScript.canGlide = false;
+            if (abilities[5] != null)
+            {
+                abilities[5].SetActive(false);
+            }
             ResumeGame();
         }
     }
@@ -84,6 +110,10 @@ public class AbilityMenu : MonoBehaviour
         if (playerScript.canGroundPound == true)
         {
             playerScript.canGroundPound = false;
+            if (abilities[6] != null)
+            {
+                abilities[6].SetActive(false);
+            }
             ResumeGame();
         }
     }
