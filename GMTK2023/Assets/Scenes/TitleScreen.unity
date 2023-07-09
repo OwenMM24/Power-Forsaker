@@ -249,11 +249,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WASD or arrow keys to move and jump. Spacebar also jumps. X or N to glide.
-    Z or M to dash. Down arrow or D to ground pound. Both dash and ground pound attack.
-    When encountering a gate, click on the ability that you would like to remove.
-    Some abilities can't be removed until others are gone first. Have fun! Press
-    spacebar to continue.
+  m_text: WASD, Space, or arrow keys to move and jump. Have fun! Press spacebar to
+    continue.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
