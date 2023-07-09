@@ -1761,6 +1761,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1535089077}
   abilityMenu: {fileID: 296407078}
+  abilities:
+  - {fileID: 191177083}
+  - {fileID: 800710750}
+  - {fileID: 700089323}
+  - {fileID: 59191014}
+  - {fileID: 870015814}
+  - {fileID: 122630083}
+  - {fileID: 245390619}
 --- !u!1 &393945482
 GameObject:
   m_ObjectHideFlags: 0
