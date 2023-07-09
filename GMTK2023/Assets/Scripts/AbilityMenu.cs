@@ -23,7 +23,6 @@ public class AbilityMenu : MonoBehaviour
         {
             abilityMenu.SetActive(true);
             Time.timeScale = 0f;
-            ChooseAbility();
         }
     }
 
