@@ -249,11 +249,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WASD or arrow keys to move and jump. Spacebar also jumps. X to glide (if
-    you have it). Z or M to dash (if you have it). Press spacebar to continue. When
-    encountering a gate, press a number to remove an ability (temporary). 1 = walk,
-    2 = jump, 3 = double jump, 4 = wall jump, 5 = dash, 6 = glide, 7 = ground pound.
-    Have fun!
+  m_text: WASD or arrow keys to move and jump. Spacebar also jumps. X or N to glide.
+    Z or M to dash. Down arrow or D to ground pound. When encountering a gate, press
+    a number to remove an ability (temporary). 1 = walk, 2 = jump, 3 = double jump,
+    4 = wall jump, 5 = dash, 6 = glide, 7 = ground pound. Have fun! Press spacebar
+    to continue.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
