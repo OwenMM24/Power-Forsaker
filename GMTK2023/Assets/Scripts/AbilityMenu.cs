@@ -27,75 +27,62 @@ public class AbilityMenu : MonoBehaviour
         }
     }
 
-    void ChooseAbility()
+    public void Ability1()
     {
-        if ((Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) && playerScript.canJump == false)
+        if (playerScript.canWalk == true)
         {
-            if (playerScript.canWalk == true)
-            {
-                playerScript.canWalk = false;
-                ResumeGame();
-            }
-        }
-        if ((Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) && (playerScript.canDoubleJump == false) && (playerScript.canWallJump == false) && (playerScript.canDash == false) && (playerScript.canGlide == false) && (playerScript.canGroundPound == false))
-        {
-            if (playerScript.canJump == true)
-            {
-                playerScript.canJump = false;
-                ResumeGame();
-            }
-        }
-        if ((Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)))
-        {
-            if (playerScript.canDoubleJump == true)
-            {
-                playerScript.canDoubleJump = false;
-                ResumeGame();
-            }
-        }
-        if ((Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4)))
-        {
-            if (playerScript.canWallJump == true)
-            {
-                playerScript.canWallJump = false;
-                ResumeGame();
-            }
-        }
-        if ((Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5)))
-        {
-            if (playerScript.canDash == true)
-            {
-                playerScript.canDash = false;
-                ResumeGame();
-            }
-        }
-        if ((Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6)))
-        {
-            if (playerScript.canGlide == true)
-            {
-                playerScript.canGlide = false;
-                ResumeGame();
-            }
-        }
-        if ((Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7)))
-        {
-            if (playerScript.canGroundPound == true)
-            {
-                playerScript.canGroundPound = false;
-                ResumeGame();
-            }
-        }
-    }
-
-    /*
-    bool RemoveAbility(bool ability) //deprecated, ignore
-    {
-        if (ability == true)
-        {
+            playerScript.canWalk = false;
             ResumeGame();
         }
     }
-    */
+    public void Ability2()
+    {
+        if (playerScript.canJump == true)
+        {
+            playerScript.canJump = false;
+            ResumeGame();
+        }
+    }
+    public void Ability3()
+    {
+        if (playerScript.canDoubleJump == true)
+        {
+            playerScript.canDoubleJump = false;
+            ResumeGame();
+        }
+    }
+    public void Ability4()
+    {
+        if (playerScript.canWallJump == true)
+        {
+            playerScript.canWallJump = false;
+            ResumeGame();
+        }
+    }
+    public void Ability5()
+    {
+        if (playerScript.canDash == true)
+        {
+            playerScript.canDash = false;
+            ResumeGame();
+        }
+    }
+    public void Ability6()
+    {
+        if (playerScript.canGlide == true)
+        {
+            playerScript.canGlide = false;
+            ResumeGame();
+        }
+    }
+    public void Ability7()
+    {
+        if (playerScript.canGroundPound == true)
+        {
+            playerScript.canGroundPound = false;
+            ResumeGame();
+        }
+    }
 
     void ResumeGame()
     {
