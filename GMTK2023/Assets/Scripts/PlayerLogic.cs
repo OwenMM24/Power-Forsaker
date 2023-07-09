@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerLogic : MonoBehaviour
 {
     Rigidbody2D rb;
+    public SpriteRenderer playerGraphic;
 
     enum states
     {
@@ -95,6 +96,7 @@ public class PlayerLogic : MonoBehaviour
                 {
                     dirFacing = 1;
                 }
+                UpdateGraphic();
 
                 if (canWalk)
                 {
@@ -143,6 +145,7 @@ public class PlayerLogic : MonoBehaviour
                     {
                         dirFacing = -1;
                     }
+                    UpdateGraphic();
                     rb.velocity = new Vector2(maxSpeed.x * dirFacing, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))));
                     wallJumpTimer = wallJumpTimerSet;
                     state = states.wallJump;
@@ -232,6 +235,7 @@ public class PlayerLogic : MonoBehaviour
                         rb.velocity = new Vector2(maxSpeed.x * dirFacing, Mathf.Sqrt(Mathf.Abs(jumpHeight * -2f * (Physics2D.gravity.y * rb.gravityScale))));
                         wallJumpTimer = wallJumpTimerSet;
                     }
+                    UpdateGraphic();
                 }
 
                 if (wallJumpTimer <= 0)
@@ -274,6 +278,18 @@ public class PlayerLogic : MonoBehaviour
             {
                 Destroy(col.gameObject);
             }
+        }
+    }
+
+    void UpdateGraphic()
+    {
+        if (dirFacing == -1)
+        {
+            playerGraphic.flipX = true;
+        }
+        if (dirFacing == 1)
+        {
+            playerGraphic.flipX = false;
         }
     }
 
