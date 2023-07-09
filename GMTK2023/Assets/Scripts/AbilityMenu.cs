@@ -18,7 +18,6 @@ public class AbilityMenu : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log((playerScript.canDoubleJump == false) && (playerScript.canWallJump = false) && (playerScript.canDash = false) && (playerScript.canGlide = false) && (playerScript.canGroundPound == false));
         if (choosingAbility)
         {
             abilityMenu.SetActive(true);
@@ -30,16 +29,22 @@ public class AbilityMenu : MonoBehaviour
     {
         if (playerScript.canWalk == true)
         {
-            playerScript.canWalk = false;
-            ResumeGame();
+            if (playerScript.canJump == false)
+            {
+                playerScript.canWalk = false;
+                ResumeGame();
+            }
         }
     }
     public void Ability2()
     {
         if (playerScript.canJump == true)
         {
-            playerScript.canJump = false;
-            ResumeGame();
+            if ((playerScript.canDoubleJump == false) && (playerScript.canWallJump == false) && (playerScript.canDash == false) && (playerScript.canGlide == false) && (playerScript.canGroundPound == false))
+            {
+                playerScript.canJump = false;
+                ResumeGame();
+            }
         }
     }
     public void Ability3()
