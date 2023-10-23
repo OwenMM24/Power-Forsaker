@@ -15,7 +15,6 @@ public class EnemyPatrol : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-  
     }
 
     // Update is called once per frame
@@ -28,8 +27,6 @@ public class EnemyPatrol : MonoBehaviour
         else if (transform.position.x < LRange)
             transform.localScale = new Vector2(1f, transform.localScale.y);
         
-
-
         if (IsFacingRight())
         {
             myRigidbody.velocity = new Vector2(moveSpeed, 0f);
@@ -38,12 +35,10 @@ public class EnemyPatrol : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(-moveSpeed, 0);
         }
-
     }
 
     bool IsFacingRight()
     {
         return transform.localScale.x > Mathf.Epsilon;
     }
-
 }

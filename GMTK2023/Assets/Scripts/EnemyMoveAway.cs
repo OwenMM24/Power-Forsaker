@@ -8,7 +8,6 @@ public class EnemyMoveAway : MonoBehaviour
     [SerializeField] Transform attackPoint;
     float fireDirection = 0f;
 
-
     RaycastHit2D WallCheckHit;
 
     [SerializeField] float checkDistance = 3f;
@@ -37,7 +36,6 @@ public class EnemyMoveAway : MonoBehaviour
     {
         shotTimer -= Time.deltaTime;
 
-
         if(Mathf.Abs(player.transform.position.x - transform.position.x) <= checkDistance)
         {
             if (player.transform.position.x < transform.position.x)
@@ -57,20 +55,16 @@ public class EnemyMoveAway : MonoBehaviour
             {
                 Shoot();
             }
-
         }
+
         else
             myRigidbody.velocity = new Vector2(0f, 0f);
-
-
     }
+
 
     void Shoot()
     {
         Instantiate(bullet, attackPoint.position, Quaternion.Euler(0, 0, fireDirection));
         shotTimer = shotTime;
-
     }
-
-
 }

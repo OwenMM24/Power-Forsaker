@@ -19,7 +19,6 @@ public class Turret : MonoBehaviour
     void Start()
     {
         position = transform.position;
-
         InvokeRepeating("PreShot", fireRate, fireRate);
     }
 
@@ -42,14 +41,10 @@ public class Turret : MonoBehaviour
         {   
             Invoke("Shoot", timeBetweenQuickShots * x);
         }
-
     }
 
     void Shoot()
     {
         Instantiate(turretBullet, attackPoint.position, Quaternion.Euler(0, 0, fireDirection));
     }
-
-
-    
 }
